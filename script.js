@@ -36,7 +36,7 @@ function syncCharacterAmount(e) {
 
 
 // DOM elements
-var resultEl = document.getElementById('result');
+var resultEl = document.getElementById('password');
 var lengthEl = document.getElementById('characterNumber');
 var uppercaseEl = document.getElementById('includeUpperCase');
 var lowercaseEl = document.getElementById('includeLowerCase');
@@ -70,8 +70,6 @@ function generatePassword(lower, upper, number, special, length) {
   const typesArray = [{ lower }, { upper }, { number }, { special }].filter (
     item => Object.values(item)[0]
   );
-  console.log(typesCount);
-  console.log(typesArray);
 
   if(typesCount === 0) {
     return '';
@@ -80,14 +78,14 @@ function generatePassword(lower, upper, number, special, length) {
   for(var i = 0; i < length; i += typesCount) {
     typesArray.forEach(type => {
       const funcName = Object.keys(type)[0];
-      console.log(funcName);
 
       generatedPassword += randomFunc[funcName]();
     })
   }
 
+  const finalPassword = generatedPassword.slice(0, length);
 
-
+  return finalPassword;
 }
 
 // Character Generator functions
