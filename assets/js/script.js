@@ -47,8 +47,8 @@ generateEl.addEventListener('click', () => {
 //
 function generatePassword(lower, upper, number, special, length) {
   var generatedPassword = '';
-  const typesCount = lower + upper + number + special;
-  const typesArray = [{ lower }, { upper }, { number }, { special }].filter (
+  var typesCount = lower + upper + number + special;
+  var typesArray = [{ lower }, { upper }, { number }, { special }].filter (
     item => Object.values(item)[0]
   );
 
@@ -58,13 +58,13 @@ function generatePassword(lower, upper, number, special, length) {
 
   for(var i = 0; i < length; i += typesCount) {
     typesArray.forEach(type => {
-      const funcName = Object.keys(type)[0];
+      var funcName = Object.keys(type)[0];
 
       generatedPassword += criteria[funcName]();
     })
   }
 
-  const finalPassword = generatedPassword.slice(0, length);
+  var finalPassword = generatedPassword.slice(0, length);
 
   return finalPassword;
 }
@@ -86,6 +86,6 @@ function generateNumber() {
 }
 
 function generateSpecial() {
-  const specials = '}{!@#$%^&*()*<>?~`/';
+  var specials = '}{!@#$%^&*()*<>?~`/';
   return specials[Math.floor(Math.random() * specials.length)];
 }
