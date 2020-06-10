@@ -30,21 +30,26 @@
         </div>
 
         <form id="passwordGeneratorForm">
-          <label for="characterNumber">Number of Characters</label>
-          <input type="range" min=""8 max="128" value="8" id="characterRange">
-          <input type="number" min=""8 max="128" value="8" id="characterNumber">
           <br>
-          <label for="includeLowerCase">Lowercase Letters</label>
-          <input type="checkbox" id="includeLowerCase">
+          <div id="numberofcharacters-container">
+            <label for="characterNumber">Number of Characters</label>
+            <input type="range" min=""8 max="128" value="8" id="characterRange">
+            <input type="number" min=""8 max="128" value="8" id="characterNumber">
+          </div>
           <br>
-          <label for="includeUpperCase">Uppercase Letters</label>
-          <input type="checkbox" id="includeUpperCase">
-          <br>
-          <label for="includeNumbers">Numbers</label>
-          <input type="checkbox" id="includeNumbers">
-          <br>
-          <label for="includeSpecials">Special Characters</label>
-          <input type="checkbox" id="includeSpecials">
+          <div id="othercriteria-container">
+            <label for="includeLowerCase">Lowercase Letters</label>
+            <input type="checkbox" id="includeLowerCase">
+            <br>
+            <label for="includeUpperCase">Uppercase Letters</label>
+            <input type="checkbox" id="includeUpperCase">
+            <br>
+            <label for="includeNumbers">Numbers</label>
+            <input type="checkbox" id="includeNumbers">
+            <br>
+            <label for="includeSpecials">Special Characters</label>
+            <input type="checkbox" id="includeSpecials">
+          </div>
         </form>
 
         <div class="card-footer">

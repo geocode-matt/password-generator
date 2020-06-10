@@ -1,32 +1,10 @@
-// // Form DOM
+//
+// Functionality to get slider bar working and synced with the text box
+//
 var characterRangeEl = document.getElementById('characterRange')
 var characterNumberEl = document.getElementById('characterNumber')
-// var formEl = document.getElementById('passwordGeneratorForm')
-// var includeLowerCaseEl = document.getElementById('includeLowerCase')
-// var includeUpperCaseEl = document.getElementById('includeUpperCase')
-// var includeNumbersEl = document.getElementById('includeNumbers')
-// var includeSpecialsEl = document.getElementById('includeSpecials')
-
-// // Generator functions DOM
-
 characterNumberEl.addEventListener('input', syncCharacterAmount);
 characterRangeEl.addEventListener('input', syncCharacterAmount);
-
-// formEl.addEventListener('submit', e => {
-//   e.preventDefault()
-//   var characterAmount = characterNumber.value
-//   var includeLowerCase = includeLowerCaseEl.checked
-//   var includeUpperCase = includeUpperCaseEl.checked
-//   var includeNumbers = includeNumbersEl.checked
-//   var includeSpecials = includeSpecialsEl.checked
-//   var password = generatePassword(characterAmount, includeLowerCase, includeUpperCase, includeNumbers, includeSpecials)
-// })
-
-// function generatePassword(characterAmount, includeLowerCase, includeUpperCase, includeNumbers, includeSpecials) {
-//   if (includeLowerCase) allCharacters = lowerCaseChars
-//   var allCharacters = lowerCaseChars
-//   if (include)
-// }
 
 function syncCharacterAmount(e) {
   var value = e.target.value
@@ -36,7 +14,7 @@ function syncCharacterAmount(e) {
 
 
 // DOM elements
-var resultEl = document.getElementById('password');
+var finalEl = document.getElementById('password');
 var lengthEl = document.getElementById('characterNumber');
 var uppercaseEl = document.getElementById('includeUpperCase');
 var lowercaseEl = document.getElementById('includeLowerCase');
@@ -44,7 +22,7 @@ var numbersEl = document.getElementById('includeNumbers');
 var specialsEl = document.getElementById('includeSpecials');
 var generateEl = document.getElementById('generate');
 
-const randomFunc = {
+var criteria = {
   lower: generateLowerCase,
   upper: generateUpperCase,
   number: generateNumber,
@@ -54,16 +32,19 @@ const randomFunc = {
 
 // Generate event listen
 generateEl.addEventListener('click', () => {
-  const length = +lengthEl.value;
-  const hasLower = lowercaseEl.checked;
-  const hasUpper = uppercaseEl.checked;
-  const hasNumbers = numbersEl.checked;
-  const hasSpecials = specialsEl.checked;
+  var length = +lengthEl.value;
+  var hasLower = lowercaseEl.checked;
+  var hasUpper = uppercaseEl.checked;
+  var hasNumbers = numbersEl.checked;
+  var hasSpecials = specialsEl.checked;
 
-  resultEl.innerText = generatePassword(hasLower, hasUpper, hasNumbers, hasSpecials, length);
+  finalEl.innerText = generatePassword(hasLower, hasUpper, hasNumbers, hasSpecials, length);
 })
 
+
+//
 // Generate password function
+//
 function generatePassword(lower, upper, number, special, length) {
   var generatedPassword = '';
   const typesCount = lower + upper + number + special;
@@ -79,7 +60,7 @@ function generatePassword(lower, upper, number, special, length) {
     typesArray.forEach(type => {
       const funcName = Object.keys(type)[0];
 
-      generatedPassword += randomFunc[funcName]();
+      generatedPassword += criteria[funcName]();
     })
   }
 
@@ -88,7 +69,10 @@ function generatePassword(lower, upper, number, special, length) {
   return finalPassword;
 }
 
+
+//
 // Character Generator functions
+//
 function generateLowerCase() {
   return String.fromCharCode((Math.floor(Math.random() * 26)) + 97);
 }
@@ -105,119 +89,3 @@ function generateSpecial() {
   const specials = '}{!@#$%^&*()*<>?~`/';
   return specials[Math.floor(Math.random() * specials.length)];
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // DOM elements
-// var resultEl = document.getElementById('#password');
-// var lengthEl = document.getElementById('#password');
-// var resultEl = document.getElementById('#password');
-// var resultEl = document.getElementById('#password');
-
-// const randomPassword = {
-//   lowerCase: randomLowerCase,
-//   upperCase: randomUpperCase,
-//   number: randomNumber,
-//   special: randomSpecial
-// };
-
-// generate.addEventListener("click", () = > {
-//   const length = lengthEl.value;
-//   console.log(typeof length);
-// })
-
-
-// 1. init pw var
-// 2. filter out unselected types
-// 3. loop over length call generator function for each type
-// 4. add final pw to pw var and return it to the box
-
-
-// Generate password Function
-// function generatePassword(lowerCase, upperCase, number, special, length) {
-
-// }
-
-// // Character Generator functions
-// function randomLowerCase() {
-//   return String.fromCharCode((Math.floor(Math.random() * 26)) + 97);
-// }
-
-// function randomUpperCase() {
-//   return String.fromCharCode((Math.floor(Math.random() * 26)) + 65);
-// }
-
-// function randomNumber() {
-//   return String.fromCharCode((Math.floor(Math.random() * 10)) + 48);
-// }
-
-// function randomSpecial() {
-//   const specials = '}{!@#$%^&*()*<>?~`/';
-//   return specials[Math.floor(Math.random() * specials.length)];
-// }
-
-// function Concat() {
-//   return String.concat(randomLowerCase(), randomUpperCase(), randomNumber(), randomSpecial());
-// }
-
-// console.log(Concat());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // Get references to the #generate element
-// var generateBtn = document.querySelector("#generate");
-
-// // Write password to the #password input
-// function writePassword() {
-//   var password = writePassword();
-//   var passwordText = document.querySelector("#password");
-
-//   passwordText.value = password;
-
-// }
-
-// writePassword();
-
-// // Add event listener to generate button
-// generateBtn.addEventListener("click", writePassword);

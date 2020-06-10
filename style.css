@@ -118,6 +118,16 @@ button[disabled] {
   overflow: hidden;
 }
 
+#numberofcharacters-container {
+  text-align: center;
+}
+
+#othercriteria-container {
+  text-align: right;
+  margin: auto;
+  padding: 0px 300px 0px 0px;
+}
+
 @media (max-width: 690px) {
   .btn {
     font-size: 1rem;
@@ -128,10 +138,20 @@ button[disabled] {
   #password {
     font-size: 1rem;
   }
+
+  #othercriteria-container {
+    text-align: center;
+    margin: auto;
+  }
 }
 
 @media (max-width: 500px) {
   .btn {
     font-size: 0.8rem;
+  }
+
+  #othercriteria-container {
+    text-align: center;
+    margin: auto;
   }
 }
