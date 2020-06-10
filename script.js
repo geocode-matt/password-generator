@@ -1,31 +1,32 @@
-// Form DOM
+// // Form DOM
 var characterRangeEl = document.getElementById('characterRange')
 var characterNumberEl = document.getElementById('characterNumber')
-var formEl = document.getElementById('passwordGeneratorForm')
-var includeLowerCaseEl = document.getElementById('includeLowerCase')
-var includeUpperCaseEl = document.getElementById('includeUpperCase')
-var includeNumbersEl = document.getElementById('includeNumbers')
-var includeSpecialsEl = document.getElementById('includeSpecials')
+// var formEl = document.getElementById('passwordGeneratorForm')
+// var includeLowerCaseEl = document.getElementById('includeLowerCase')
+// var includeUpperCaseEl = document.getElementById('includeUpperCase')
+// var includeNumbersEl = document.getElementById('includeNumbers')
+// var includeSpecialsEl = document.getElementById('includeSpecials')
 
-// Generator functions DOM
-var 
+// // Generator functions DOM
 
-characterNumberEl.addEventListener('input', syncCharacterAmount)
-characterRangeEl.addEventListener('input', syncCharacterAmount)
+characterNumberEl.addEventListener('input', syncCharacterAmount);
+characterRangeEl.addEventListener('input', syncCharacterAmount);
 
-formEl.addEventListener('submit', e => {
-  e.preventDefault()
-  var characterAmount = characterNumber.value
-  var includeLowerCase = includeLowerCaseEl.checked
-  var includeUpperCase = includeUpperCaseEl.checked
-  var includeNumbers = includeNumbersEl.checked
-  var includeSpecials = includeSpecialsEl.checked
-  var password = generatePassword(characterAmount, includeLowerCase, includeUpperCase, includeNumbers, includeSpecials)
-})
+// formEl.addEventListener('submit', e => {
+//   e.preventDefault()
+//   var characterAmount = characterNumber.value
+//   var includeLowerCase = includeLowerCaseEl.checked
+//   var includeUpperCase = includeUpperCaseEl.checked
+//   var includeNumbers = includeNumbersEl.checked
+//   var includeSpecials = includeSpecialsEl.checked
+//   var password = generatePassword(characterAmount, includeLowerCase, includeUpperCase, includeNumbers, includeSpecials)
+// })
 
-function generatePassword(characterAmount, includeLowerCase, includeUpperCase, includeNumbers, includeSpecials) {
-  
-}
+// function generatePassword(characterAmount, includeLowerCase, includeUpperCase, includeNumbers, includeSpecials) {
+//   if (includeLowerCase) allCharacters = lowerCaseChars
+//   var allCharacters = lowerCaseChars
+//   if (include)
+// }
 
 function syncCharacterAmount(e) {
   var value = e.target.value
@@ -34,7 +35,60 @@ function syncCharacterAmount(e) {
 }
 
 
+// DOM elements
+var resultEl = document.getElementById('result');
+var lengthEl = document.getElementById('characterNumber');
+var uppercaseEl = document.getElementById('includeUpperCase');
+var lowercaseEl = document.getElementById('includeLowerCase');
+var numbersEl = document.getElementById('includeNumbers');
+var specialsEl = document.getElementById('includeSpecials');
+var generateEl = document.getElementById('generate');
 
+const randomFunc = {
+  lower: generateLowerCase,
+  upper: generateUpperCase,
+  number: generateNumber,
+  special: generateSpecial,
+  length: characterNumberEl
+};
+
+// Generate event listen
+generateEl.addEventListener('click', () => {
+  const length = +lengthEl.value;
+  const hasLower = lowercaseEl.checked;
+  const hasUpper = uppercaseEl.checked;
+  const hasNumbers = numbersEl.checked;
+  const hasSpecials = specialsEl.checked;
+
+  resultEl.innerText = generatePassword(hasLower, hasUpper, hasNumbers, hasSpecials, length);
+})
+
+// Generate password function
+function generatePassword(lower, upper, number, special, length) {
+  var generatedPassword = '';
+  const typesCount = lower + upper + number + special;
+  const typesArray = [{ lower }, { upper }, { number }, { special }].filter (
+    item => Object.values(item)[0]
+  );
+  console.log(typesCount);
+  console.log(typesArray);
+
+  if(typesCount === 0) {
+    return '';
+  }
+
+  for(var i = 0; i < length; i += typesCount) {
+    typesArray.forEach(type => {
+      const funcName = Object.keys(type)[0];
+      console.log(funcName);
+
+      generatedPassword += randomFunc[funcName]();
+    })
+  }
+
+
+
+}
 
 // Character Generator functions
 function generateLowerCase() {
@@ -53,8 +107,6 @@ function generateSpecial() {
   const specials = '}{!@#$%^&*()*<>?~`/';
   return specials[Math.floor(Math.random() * specials.length)];
 }
-
-
 
 
 
@@ -103,27 +155,27 @@ function generateSpecial() {
 
 
 // Generate password Function
-function generatePassword(lowerCase, upperCase, number, special, length) {
+// function generatePassword(lowerCase, upperCase, number, special, length) {
 
-}
+// }
 
-// Character Generator functions
-function randomLowerCase() {
-  return String.fromCharCode((Math.floor(Math.random() * 26)) + 97);
-}
+// // Character Generator functions
+// function randomLowerCase() {
+//   return String.fromCharCode((Math.floor(Math.random() * 26)) + 97);
+// }
 
-function randomUpperCase() {
-  return String.fromCharCode((Math.floor(Math.random() * 26)) + 65);
-}
+// function randomUpperCase() {
+//   return String.fromCharCode((Math.floor(Math.random() * 26)) + 65);
+// }
 
-function randomNumber() {
-  return String.fromCharCode((Math.floor(Math.random() * 10)) + 48);
-}
+// function randomNumber() {
+//   return String.fromCharCode((Math.floor(Math.random() * 10)) + 48);
+// }
 
-function randomSpecial() {
-  const specials = '}{!@#$%^&*()*<>?~`/';
-  return specials[Math.floor(Math.random() * specials.length)];
-}
+// function randomSpecial() {
+//   const specials = '}{!@#$%^&*()*<>?~`/';
+//   return specials[Math.floor(Math.random() * specials.length)];
+// }
 
 // function Concat() {
 //   return String.concat(randomLowerCase(), randomUpperCase(), randomNumber(), randomSpecial());
