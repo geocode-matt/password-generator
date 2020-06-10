@@ -21,7 +21,7 @@ This page is fully accessible.
 ## Screenshot
 
 Here is a screenshot of my password generator page!:
-<img src="./images/screenshot.png">
+<img src="./assets/images/screenshot.png">
 
 
 ## Link to GitHub Repository
